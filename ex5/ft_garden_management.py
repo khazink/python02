@@ -13,13 +13,13 @@ class GardenManager:
         except ValueError as e:
             print(f"Error adding plant: {e}")
         else:
-            self.plants = plant_name
+            self.plants.append(plant_name)
             print(f"Adding {plant_name} successfully")
 
     def water_plant(self) -> None:
         print("Opening watering system")
         try:
-            if self.plant is None:
+            if self.plants is None:
                 raise ValueError("Plant is empty")
         except ValueError:
             print("Error: Cannot water None - invalid plant!")
@@ -50,10 +50,25 @@ class GardenManager:
         except ValueError as e:
             print(f"Error: {e}")
 
-    def check_water_level(self)
+    def check_water_level(self, water_tank: int) -> None:
+        try:
+            if water_tank <= 0:
+                raise GardenError
+        except GardenError as e:
+            print("Caught GardenError: Not enough water in tank")
+            print("System recovered and continuing...")
+
 
 def test_garden_management() -> None:
-    pass
+    print("Adding plants to garden...")
+    garden = GardenManager()
+    mygarden_list = ["tomato", "lettuce", ""]
+    for mygarden in mygarden_list:
+        garden.add_plant(mygarden)
+    print()
+    garden.water_plant()
+    print()
+    
 
 
 if __name__ == "__main__":
