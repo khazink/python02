@@ -14,7 +14,7 @@ class GardenManager:
             print(f"Error adding plant: {e}")
         else:
             self.plants.append(plant_name)
-            print(f"Adding {plant_name} successfully")
+            print(f"Added {plant_name} successfully")
 
     def water_plant(self) -> None:
         print("Opening watering system")
@@ -30,6 +30,7 @@ class GardenManager:
             print("Closing watering system(cleanup)")
 
 
+    @staticmethod
     def check_plant_health(plant_name: str, water_level: int, 
                        sunlight_hours: int) -> None:
         try:
@@ -48,7 +49,7 @@ class GardenManager:
                 print(f"{plant_name}: healthy (water:{water_level},"
                     f" sun: {sunlight_hours}")
         except ValueError as e:
-            print(f"Error: {e}")
+            print(f"Error checking {plant_name}: {e}")
 
     def check_water_level(self, water_tank: int) -> None:
         try:
@@ -66,10 +67,20 @@ def test_garden_management() -> None:
     for mygarden in mygarden_list:
         garden.add_plant(mygarden)
     print()
+    print("Watering plants...")
     garden.water_plant()
     print()
+    print("Checking plant health...")
+    garden.check_plant_health("tomato", 5, 8)
+    garden.check_plant_health("lettuce", 15, 7)
+    print()
+    print("Testing error recovery...")
+    garden.check_water_level(0)
+    print()
+    print("Garden management system test complete!")
     
 
 
 if __name__ == "__main__":
+    print("=== Garden Management System ===\n")
     test_garden_management()
